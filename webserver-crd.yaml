@@ -1,0 +1,41 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: webservers.my.app
+spec:
+  group: my.app
+  names:
+    plural: webservers
+    singular: webserver
+    kind: Webserver
+    shortNames:
+      - ws
+  scope: Namespaced
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              required:
+                - image
+                - replicas
+              properties:
+                image:
+                  type: string
+                  description: The container image to run for the webserver.
+                replicas:
+                  type: integer
+                  minimum: 1
+                  default: 1
+                  description: The desired number of webserver replicas.
+                port:
+                  type: integer
+                  minimum: 80
+                  maximum: 65535
+                  default: 80
+                  description: The port on which the application listens.

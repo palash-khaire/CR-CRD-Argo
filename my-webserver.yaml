@@ -1,0 +1,9 @@
+apiVersion: my.app/v1
+kind: Webserver
+metadata:
+  name: my-nginx-webserver
+  namespace: my-dev-project
+spec:
+  image: "nginx:latest"
+  replicas: 3
+  port: 8080
